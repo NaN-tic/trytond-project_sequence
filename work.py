@@ -12,9 +12,9 @@ class Work:
 
     code = fields.Char('Code', readonly=True, select=True)
 
-    def get_rec_name(self):
-        res = super(Work, self).get_rec_name()
-        return '[%s] %s' % (code, res)
+    def get_rec_name(self, name):
+        res = super(Work, self).get_rec_name(name)
+        return '[%s] %s' % (self.code, res)
 
     @classmethod
     def search_rec_name(cls, name, clause):
