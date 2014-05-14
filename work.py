@@ -12,6 +12,17 @@ class Work:
 
     code = fields.Char('Code', readonly=True, select=True)
 
+    def get_rec_name(self):
+        res = super(Work, self).get_rec_name()
+        return '[%s] %s' % (code, res)
+
+    @classmethod
+    def search_rec_name(cls, name, clause):
+        return ['OR',
+            ('code',) + tuple(clause[1:]),
+            ('work',) + tuple(clause[1:]),
+            ]
+
     @classmethod
     def create(cls, vlist):
         Sequence = Pool().get('ir.sequence')
