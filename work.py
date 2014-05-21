@@ -34,3 +34,11 @@ class Work:
                 config = Configuration(1)
                 values['code'] = Sequence.get_id(config.work_sequence.id)
         return super(Work, cls).create(vlist)
+
+    @classmethod
+    def copy(cls, works, default=None):
+        if default is None:
+            default = {}
+        if 'code' not in default:
+            default['code'] = None
+        return super(Work, cls).copy(works, default)
