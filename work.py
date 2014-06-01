@@ -14,7 +14,9 @@ class Work:
 
     def get_rec_name(self, name):
         res = super(Work, self).get_rec_name(name)
-        return '[%s] %s' % (self.code, res)
+        if self.parent:
+            return '[%s] %s' % (self.code, res)
+        return res
 
     @classmethod
     def search_rec_name(cls, name, clause):
