@@ -3,7 +3,7 @@
      copyright notices and license terms. -->
 
 <data>
-    <xpath expr="/tree/field[@name='name']" position="before">
+    <xpath expr="/tree/field[@name='rec_name']" position="before">
         <field name="code"/>
     </xpath>
 </data>
