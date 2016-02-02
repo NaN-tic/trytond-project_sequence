@@ -20,7 +20,9 @@ class Work:
 
     @classmethod
     def search_rec_name(cls, name, clause):
+        domain = super(Work, cls).search_rec_name(name, clause)
         return ['OR',
+            domain,
             ('code',) + tuple(clause[1:]),
             ('work',) + tuple(clause[1:]),
             ]
