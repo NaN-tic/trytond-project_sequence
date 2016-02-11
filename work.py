@@ -2,6 +2,7 @@
 # this repository contains the full copyright notices and license terms.
 from trytond.model import fields
 from trytond.pool import Pool, PoolMeta
+from trytond.transaction import Transaction
 
 __all__ = ['Work']
 __metaclass__ = PoolMeta
@@ -13,8 +14,11 @@ class Work:
     code = fields.Char('Code', readonly=True, select=True)
 
     def get_rec_name(self, name):
-        res = super(Work, self).get_rec_name(name)
-        if self.parent:
+        transaction = Transaction()
+        with transaction.set_context(rec_name_without_code=True):
+            res = super(Work, self).get_rec_name(name)
+        if (self.code and
+                not transaction.context.get('rec_name_without_code', False)):
             return '[%s] %s' % (self.code, res)
         return res
 
