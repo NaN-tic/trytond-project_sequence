@@ -1,0 +1,59 @@
+#
+msgid ""
+msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+msgctxt "field:project.work,code:"
+msgid "Code"
+msgstr "Código"
+
+msgctxt "field:work.configuration,create_date:"
+msgid "Create Date"
+msgstr "Fecha creación"
+
+msgctxt "field:work.configuration,create_uid:"
+msgid "Create User"
+msgstr "Usuario creación"
+
+msgctxt "field:work.configuration,id:"
+msgid "ID"
+msgstr "ID"
+
+msgctxt "field:work.configuration,rec_name:"
+msgid "Name"
+msgstr "Nombre"
+
+msgctxt "field:work.configuration,work_sequence:"
+msgid "Work Sequence"
+msgstr "Secuencia trabajo"
+
+msgctxt "field:work.configuration,write_date:"
+msgid "Write Date"
+msgstr "Fecha modificación"
+
+msgctxt "field:work.configuration,write_uid:"
+msgid "Write User"
+msgstr "Usuario modificación"
+
+msgctxt "model:ir.action,name:act_work_configuration_form"
+msgid "Work Configuration"
+msgstr "Configuración trabajo"
+
+msgctxt "model:ir.sequence,name:sequence_work"
+msgid "Work"
+msgstr "Trabajo"
+
+msgctxt "model:ir.sequence.type,name:sequence_type_work"
+msgid "Work"
+msgstr "Trabajo"
+
+msgctxt "model:ir.ui.menu,name:menu_work_configuration"
+msgid "Work Configuration"
+msgstr "Configuración trabajo"
+
+msgctxt "model:work.configuration,name:"
+msgid "Work Configuration"
+msgstr "Configuración trabajo"
+
+msgctxt "view:work.configuration:"
+msgid "Work Configuration"
+msgstr "Configuración trabajo"
