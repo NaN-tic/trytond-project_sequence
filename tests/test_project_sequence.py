@@ -25,6 +25,8 @@ class ProjectSequenceTestCase(ModuleTestCase):
                         'company': company.id,
                         }])
             self.assertEqual(p_work.code, '1')
+            p_work2, = ProjectWork.copy([p_work])
+            self.assertEqual(p_work2.code, '2')
 
 def suite():
     suite = test_suite()
