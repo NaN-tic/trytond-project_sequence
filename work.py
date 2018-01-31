@@ -5,11 +5,10 @@ from trytond.pool import Pool, PoolMeta
 from trytond.transaction import Transaction
 
 __all__ = ['Work']
-__metaclass__ = PoolMeta
-
 
 class Work:
     __name__ = 'project.work'
+    __metaclass__ = PoolMeta
 
     code = fields.Char('Code', readonly=True, select=True)
 
@@ -40,6 +39,8 @@ class Work:
         for values in vlist:
             if not values.get('code'):
                 config = Configuration(1)
+                if not config.work_sequence:
+                    continue
                 values['code'] = Sequence.get_id(config.work_sequence.id)
         return super(Work, cls).create(vlist)
 

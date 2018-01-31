@@ -17,16 +17,23 @@ class ProjectSequenceTestCase(ModuleTestCase):
         "Test Project Sequence"
         pool = Pool()
         ProjectWork = pool.get('project.work')
+        Config = pool.get('work.configuration')
+        Sequence = pool.get('ir.sequence')
 
+        sequence, = Sequence.search([('code', '=', 'project.work')])
         company = create_company()
         with set_company(company):
-            p_work, = ProjectWork.create([{
-                        'name': 'Work',
-                        'company': company.id,
-                        }])
+            config = Config(1)
+            config.work_sequence = sequence
+            config.save()
+            p_work = ProjectWork()
+            p_work.name = 'Work'
+            p_work.company = company
+            p_work.save()
             self.assertEqual(p_work.code, '1')
             p_work2, = ProjectWork.copy([p_work])
             self.assertEqual(p_work2.code, '2')
+
 
 def suite():
     suite = test_suite()

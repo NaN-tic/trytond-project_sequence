@@ -23,10 +23,10 @@ this repository contains the full copyright notices and license terms. -->
             id="menu_work_configuration"
             sequence="0" icon="tryton-list"/>
 
-        <record model="ir.property" id="property_work_sequence">
-            <field name="field"
-                search="[('model.model', '=', 'work.configuration'), ('name', '=', 'work_sequence')]"/>
-            <field name="value" eval="'ir.sequence,' + str(ref('sequence_work'))"/>
+        <record model="work.configuration.work_sequence"
+            id="property_work_sequence">
+            <field name="work_sequence" ref="sequence_work"/>
         </record>
+
     </data>
 </tryton>
