@@ -27,7 +27,6 @@ class Work:
         return ['OR',
             domain,
             ('code',) + tuple(clause[1:]),
-            ('work',) + tuple(clause[1:]),
             ]
 
     @classmethod
