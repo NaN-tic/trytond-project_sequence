@@ -6,9 +6,8 @@ from trytond.transaction import Transaction
 
 __all__ = ['Work']
 
-class Work:
+class Work(metaclass=PoolMeta):
     __name__ = 'project.work'
-    __metaclass__ = PoolMeta
 
     code = fields.Char('Code', readonly=True, select=True)
 
