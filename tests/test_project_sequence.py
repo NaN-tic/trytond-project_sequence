@@ -20,7 +20,7 @@ class ProjectSequenceTestCase(ModuleTestCase):
         Config = pool.get('work.configuration')
         Sequence = pool.get('ir.sequence')
 
-        sequence, = Sequence.search([('code', '=', 'project.work')])
+        sequence, = Sequence.search([('name', '=', 'Work')])
         company = create_company()
         with set_company(company):
             config = Config(1)

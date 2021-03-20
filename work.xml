@@ -5,7 +5,6 @@ this repository contains the full copyright notices and license terms. -->
     <data>
        <record model="ir.sequence.type" id="sequence_type_work">
             <field name="name">Work</field>
-            <field name="code">project.work</field>
         </record>
         <record model="ir.sequence.type-res.group"
             id="sequence_type_party_group_admin">
@@ -20,7 +19,7 @@ this repository contains the full copyright notices and license terms. -->
 
         <record model="ir.sequence" id="sequence_work">
             <field name="name">Work</field>
-            <field name="code">project.work</field>
+            <field name="sequence_type" ref="sequence_type_work"/>
         </record>
 
        <record model="ir.ui.view" id="work_view_form">

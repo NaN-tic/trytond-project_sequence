@@ -3,11 +3,10 @@
 from trytond import backend
 from trytond.model import ModelView, ModelSQL, ModelSingleton, fields
 from trytond.pool import Pool
-from trytond.pyson import Eval
+from trytond.pyson import Eval, Id
 from trytond.tools.multivalue import migrate_property
 from trytond.modules.company.model import (
     CompanyMultiValueMixin, CompanyValueMixin)
-__all__ = ['Configuration', 'ConfigurationWorkSequence']
 
 
 class Configuration(
@@ -17,7 +16,8 @@ class Configuration(
 
     work_sequence = fields.MultiValue(fields.Many2One('ir.sequence',
             'Work Sequence', domain=[
-                ('code', '=', 'project.work'),
+                ('sequence_type', '=', Id('project_sequence',
+                        'sequence_type_work')),
                 ('company', 'in',
                     [Eval('context', {}).get('company', -1), None]),
                 ]))
@@ -36,7 +36,8 @@ class ConfigurationWorkSequence(ModelSQL, CompanyValueMixin):
 
     work_sequence = fields.Many2One('ir.sequence',
             'Work Sequence', domain=[
-                ('code', '=', 'project.work'),
+                ('sequence_type', '=', Id('project_sequence',
+                        'sequence_type_work')),
                 ('company', 'in',
                     [Eval('company', -1), None]),
                 ], depends=['company'])
@@ -63,7 +64,10 @@ class ConfigurationWorkSequence(ModelSQL, CompanyValueMixin):
     def default_work_sequence(cls):
         pool = Pool()
         Sequence = pool.get('ir.sequence')
-        sequence = Sequence.search([('code', '=', 'project.work')])
-        if sequence:
-            return sequence[0]
-        return None
+        ModelData = pool.get('ir.model.data')
+
+        sequence_type_id = ModelData.get_id('project_sequence',
+            'sequence_type_work')
+        sequences = Sequence.search([('sequence_type', '=', sequence_type_id)])
+        if sequences:
+            return sequences[0]

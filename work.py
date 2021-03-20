@@ -30,7 +30,6 @@ class Work(metaclass=PoolMeta):
 
     @classmethod
     def create(cls, vlist):
-        Sequence = Pool().get('ir.sequence')
         Configuration = Pool().get('work.configuration')
 
         vlist = [x.copy() for x in vlist]
@@ -39,7 +38,7 @@ class Work(metaclass=PoolMeta):
                 config = Configuration(1)
                 if not config.work_sequence:
                     continue
-                values['code'] = Sequence.get_id(config.work_sequence.id)
+                values['code'] = config.work_sequence.get()
         return super(Work, cls).create(vlist)
 
     @classmethod
