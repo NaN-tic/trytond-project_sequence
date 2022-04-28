@@ -1,15 +1,15 @@
-# This file is part project_sequence module for Tryton.
-# The COPYRIGHT file at the top level of this repository contains
-# the full copyright notices and license terms.
-import unittest
+
+# This file is part of Tryton.  The COPYRIGHT file at the top level of
+# this repository contains the full copyright notices and license terms.
+
 from trytond.tests.test_tryton import ModuleTestCase, with_transaction
-from trytond.tests.test_tryton import suite as test_suite
 from trytond.pool import Pool
-from trytond.modules.company.tests import create_company, set_company
+from trytond.modules.company.tests import (CompanyTestMixin, create_company,
+    set_company)
 
 
-class ProjectSequenceTestCase(ModuleTestCase):
-    'Test Project Sequence module'
+class ProjectSequenceTestCase(CompanyTestMixin, ModuleTestCase):
+    'Test ProjectSequence module'
     module = 'project_sequence'
 
     @with_transaction()
@@ -35,8 +35,4 @@ class ProjectSequenceTestCase(ModuleTestCase):
             self.assertEqual(p_work2.code, '2')
 
 
-def suite():
-    suite = test_suite()
-    suite.addTests(unittest.TestLoader().loadTestsFromTestCase(
-            ProjectSequenceTestCase))
-    return suite
+del ModuleTestCase
