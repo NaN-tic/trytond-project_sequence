@@ -9,7 +9,7 @@ __all__ = ['Work']
 class Work(metaclass=PoolMeta):
     __name__ = 'project.work'
 
-    code = fields.Char('Code', readonly=True, select=True)
+    code = fields.Char('Code', readonly=True)
 
     def get_rec_name(self, name):
         transaction = Transaction()
