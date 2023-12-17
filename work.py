@@ -3,13 +3,26 @@
 from trytond.model import fields
 from trytond.pool import Pool, PoolMeta
 from trytond.transaction import Transaction
+from trytond.pyson import Eval
 
-__all__ = ['Work']
 
 class Work(metaclass=PoolMeta):
     __name__ = 'project.work'
 
-    code = fields.Char('Code', readonly=True)
+    code = fields.Char('Code', required=True, states={
+            'readonly': Eval('code_readonly', True),
+            })
+    code_readonly = fields.Function(fields.Boolean('Code Readonly'),
+        'get_code_readonly')
+
+    @classmethod
+    def default_code_readonly(cls, **pattern):
+        Configuration = Pool().get('work.configuration')
+        config = Configuration(1)
+        return bool(config.get_multivalue('work_sequence', **pattern))
+
+    def get_code_readonly(self, name):
+        return True
 
     def get_rec_name(self, name):
         transaction = Transaction()
