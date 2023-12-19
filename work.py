@@ -9,7 +9,7 @@ from trytond.pyson import Eval
 class Work(metaclass=PoolMeta):
     __name__ = 'project.work'
 
-    code = fields.Char('Code', required=True, states={
+    code = fields.Char('Code', states={
             'readonly': Eval('code_readonly', True),
             })
     code_readonly = fields.Function(fields.Boolean('Code Readonly'),
@@ -22,7 +22,7 @@ class Work(metaclass=PoolMeta):
         return bool(config.get_multivalue('work_sequence', **pattern))
 
     def get_code_readonly(self, name):
-        return True
+        return self.default_code_readonly()
 
     def get_rec_name(self, name):
         transaction = Transaction()
