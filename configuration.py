@@ -38,7 +38,7 @@ class ConfigurationWorkSequence(ModelSQL, CompanyValueMixin):
                         'sequence_type_work')),
                 ('company', 'in',
                     [Eval('company', -1), None]),
-                ], depends=['company'])
+                ])
 
     @classmethod
     def default_work_sequence(cls):
