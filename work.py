@@ -28,7 +28,7 @@ class Work(metaclass=PoolMeta):
         transaction = Transaction()
         with transaction.set_context(rec_name_without_code=True):
             res = super(Work, self).get_rec_name(name)
-        if (self.code and
+        if (self.code and self.type == 'task' and
                 not transaction.context.get('rec_name_without_code', False)):
             return '[%s] %s' % (self.code, res)
         return res
