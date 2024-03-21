@@ -16,6 +16,12 @@ class Work(metaclass=PoolMeta):
         'get_code_readonly')
 
     @classmethod
+    def __setup__(cls):
+        super().__setup__()
+        cls._order.insert(0, ('code', 'ASC'))
+        cls._order.insert(1, ('id', 'ASC'))
+
+    @classmethod
     def default_code_readonly(cls, **pattern):
         Configuration = Pool().get('work.configuration')
         config = Configuration(1)
