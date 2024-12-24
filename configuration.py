@@ -25,7 +25,7 @@ class Configuration(
         pool = Pool()
         if field in {'work_sequence'}:
             return pool.get('work.configuration.work_sequence')
-        return super(Configuration, cls).multivalue_model(field)
+        return super().multivalue_model(field)
 
 
 class ConfigurationWorkSequence(ModelSQL, CompanyValueMixin):

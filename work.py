@@ -33,7 +33,7 @@ class Work(metaclass=PoolMeta):
     def get_rec_name(self, name):
         transaction = Transaction()
         with transaction.set_context(rec_name_without_code=True):
-            res = super(Work, self).get_rec_name(name)
+            res = super().get_rec_name(name)
         if (self.code and self.type == 'task' and
                 not transaction.context.get('rec_name_without_code', False)):
             return '[%s] %s' % (self.code, res)
@@ -41,7 +41,7 @@ class Work(metaclass=PoolMeta):
 
     @classmethod
     def search_rec_name(cls, name, clause):
-        domain = super(Work, cls).search_rec_name(name, clause)
+        domain = super().search_rec_name(name, clause)
         return ['OR',
             domain,
             ('code',) + tuple(clause[1:]),
@@ -58,12 +58,13 @@ class Work(metaclass=PoolMeta):
                 if not config.work_sequence:
                     continue
                 values['code'] = config.work_sequence.get()
-        return super(Work, cls).create(vlist)
+        return super().create(vlist)
 
     @classmethod
     def copy(cls, works, default=None):
         if default is None:
             default = {}
-        if 'code' not in default:
-            default['code'] = None
-        return super(Work, cls).copy(works, default)
+        else:
+            default = default.copy()
+        default.setdefault('code')
+        return super().copy(works, default)
