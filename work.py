@@ -1,6 +1,6 @@
 # This file is part of Tryton.  The COPYRIGHT file at the top level of
 # this repository contains the full copyright notices and license terms.
-from trytond.model import fields
+from trytond.model import fields, Unique
 from trytond.pool import Pool, PoolMeta
 from trytond.transaction import Transaction
 from trytond.pyson import Eval
@@ -20,6 +20,11 @@ class Work(metaclass=PoolMeta):
         super().__setup__()
         cls._order.insert(0, ('code', 'ASC'))
         cls._order.insert(1, ('id', 'ASC'))
+        t = cls.__table__()
+        cls._sql_constraints += [
+            ('code_unique', Unique(t, t.code, t.company),
+                'project_sequence.msg_code_unique'),
+            ]
 
     @classmethod
     def default_code_readonly(cls, **pattern):
