@@ -21,7 +21,7 @@ this repository contains the full copyright notices and license terms. -->
         <menuitem parent="project.menu_configuration"
             action="act_work_configuration_form"
             id="menu_work_configuration"
-            sequence="0" icon="tryton-list"/>
+            sequence="20" icon="tryton-list"/>
 
         <record model="ir.model.access" id="access_work_configuration">
             <field name="model">work.configuration</field>
